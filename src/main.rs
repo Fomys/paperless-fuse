@@ -152,7 +152,8 @@ impl Filesystem for HelloFS {
             {
                 file_attr.size = self
                     .paperless
-                    .document_size(document::Id::from(ino & 0x0FFF_FFFF_FFFF_FFFF));
+                    .document_size(document::Id::from(ino & 0x0FFF_FFFF_FFFF_FFFF))
+                    as u64;
                 file_attr.nlink = 1;
                 file_attr.ino = *ino;
                 file_attr.perm = 0o440;
@@ -192,7 +193,8 @@ impl Filesystem for HelloFS {
             file_attr.kind = FileType::RegularFile;
             file_attr.size = self
                 .paperless
-                .document_size(document::Id::from(ino & 0x0FFF_FFFF_FFFF_FFFF));
+                .document_size(document::Id::from(ino & 0x0FFF_FFFF_FFFF_FFFF))
+                as u64;
         } else if (ino & 0xF000_0000_0000_0000 == 0x2000_0000_0000_0000)
             | (ino & 0xF000_0000_0000_0000 == 0x3000_0000_0000_0000)
             | (ino & 0xF000_0000_0000_0000 == 0x4000_0000_0000_0000)
